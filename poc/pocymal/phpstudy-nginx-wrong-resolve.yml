@@ -1,0 +1,63 @@
+name: poc-yaml-phpstudy-nginx-wrong-resolve
+set:
+    name: randomInt(10000000, 99999999)
+rules:
+    r0:
+        request:
+            method: GET
+            path: /{{name}}.php
+            follow_redirects: false
+        expression: response.status != 200
+    r1:
+        request:
+            cache: true
+            method: GET
+            path: /index.html
+            follow_redirects: false
+        expression: response.status == 200 && response.headers["Server"].icontains("nginx")
+    r2:
+        request:
+            cache: true
+            method: GET
+            path: /index.html/.php
+            follow_redirects: false
+        expression: response.status == 200 && response.headers["Server"].icontains("nginx")
+    r3:
+        request:
+            cache: true
+            method: GET
+            path: /index.html/.xxx
+            follow_redirects: false
+        expression: response.status != 200
+    r4:
+        request:
+            cache: true
+            method: GET
+            path: /{{name}}.php
+            follow_redirects: false
+        expression: response.status != 200
+    r5:
+        request:
+            cache: true
+            method: GET
+            path: /index.php
+            follow_redirects: false
+        expression: response.status == 200 && response.headers["Server"].icontains("nginx")
+    r6:
+        request:
+            cache: true
+            method: GET
+            path: /index.php/.php
+            follow_redirects: false
+        expression: response.status == 200 && response.headers["Server"].icontains("nginx")
+    r7:
+        request:
+            cache: true
+            method: GET
+            path: /index.php/.xxx
+            follow_redirects: false
+        expression: response.status != 200
+expression: r0() && r1() && r2() && r3() || r4() && r5() && r6() && r7()
+detail:
+    links:
+        - https://www.seebug.org/vuldb/ssvid-98364

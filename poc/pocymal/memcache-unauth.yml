@@ -1,0 +1,7 @@
+name: memcache-unauth
+set:
+  mem: Memcache()
+rules:
+detail:
+  links:
+    - http://wiki.peiqi.tech/redteam/vulnerability/unauthorized/Memcache%2011211%E7%AB%AF%E5%8F%A3.html

@@ -1,0 +1,12 @@
+name: weblogic-login
+rules:
+    r11:
+        request:
+            method: GET
+            path: /console/login/LoginForm.jsp
+        expression: |
+            response.status == 200 && response.body.bcontains(b'Oracle WebLogic Server')
+expression: r11()
+detail:
+    links:
+        - /console/login/LoginForm.jsp

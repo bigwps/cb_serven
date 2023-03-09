@@ -1,0 +1,7 @@
+name: mongodb-unauth
+set:
+  mong: MongodbUnauth()
+rules:
+detail:
+  links:
+    - https://www.freebuf.com/vuls/212799.html

@@ -1,0 +1,11 @@
+name: coremail-information
+rules:
+  r0:
+    request:
+      method: GET
+      path: /mailsms/s?func=ADMIN:appState&dumpConfig=/
+    expression: response.status == 200 && response.body.bcontains(b'<code>S_OK</code>')
+expression: r0()
+detail:
+  links:
+    - Coremail 某个接口存在配置信息泄露漏洞

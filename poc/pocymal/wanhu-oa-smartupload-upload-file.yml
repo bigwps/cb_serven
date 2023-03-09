@@ -1,0 +1,8 @@
+name: wanhu-oa-smartupload-upload-file
+rules:
+  r0:
+    request:
+      method: GET
+      path: /defaultroot/extension/smartUpload.jsp?path=information&fileName=infoPicName&saveName=infoPicSaveName&tableName=infoPicTable&fileMaxSize=0&fileMaxNum=0&fileType=gif,jpg,bmp,jsp,png&fileMinWidth=0&fileMinHeight=0&fileMaxWidth=0&fileMaxHeight=0
+    expression: response.status == 200 && response.body.bcontains(b'smartUpload.jsp?path=information&mode=add&fileName=infoPicName&saveName=infoPicSaveName&tableName=infoPicTable')
+expression: r0()

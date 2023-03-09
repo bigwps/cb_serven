@@ -1,0 +1,13 @@
+name: poc-yaml-kibana-unauth
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /app/kibana
+            follow_redirects: false
+        expression: response.status == 200 && response.body.bcontains(b".kibanaWelcomeView")
+expression: r0()
+detail:
+    links:
+        - https://zhuanlan.zhihu.com/p/61215662

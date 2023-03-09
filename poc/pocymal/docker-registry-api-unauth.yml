@@ -1,0 +1,18 @@
+name: poc-yaml-docker-registry-api-unauth
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /v2/
+        expression: response.status == 200 && "docker-distribution-api-version" in response.headers && response.headers["docker-distribution-api-version"].icontains("registry/2.0")
+    r1:
+        request:
+            cache: true
+            method: GET
+            path: /v2/_catalog
+        expression: response.status == 200 && response.content_type.icontains("application/json") && response.body.bcontains(b"repositories")
+expression: r0() && r1()
+detail:
+    links:
+        - http://www.polaris-lab.com/index.php/archives/253/

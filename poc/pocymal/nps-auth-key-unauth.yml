@@ -1,0 +1,10 @@
+name: NPS-auth_key-Unauthorized-access
+rules:
+  r0:
+    request:
+      method: POST
+      path: /client/list
+      body: |
+        search=&order=asc&offset=0&limit=10&auth_key=8c98b1bdedbc569c4e61eeaeb11ce772&timestamp=1659838908
+    expression: response.status == 200 && response.body.bcontains(b'"bridgePort":') && response.body.bcontains(b'"bridgeType":')
+expression: r0()

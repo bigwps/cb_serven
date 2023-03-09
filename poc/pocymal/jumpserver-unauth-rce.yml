@@ -1,0 +1,37 @@
+name: poc-yaml-jumpserver-unauth-rce
+set:
+    random: randomLowercase(5)
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /api/v1/authentication/connection-token/
+            follow_redirects: false
+        expression: response.status == 401 && response.content_type.icontains("application/json") && response.body.bcontains(b"not_authenticated")
+    r1:
+        request:
+            cache: true
+            method: GET
+            path: /api/v1/authentication/connection-token/?user-only={{random}}
+            follow_redirects: false
+        expression: response.status == 404 && response.content_type.icontains("application/json") && response.body.bcontains(b"\"\"")
+    r2:
+        request:
+            cache: true
+            method: GET
+            path: /api/v1/users/connection-token/
+            follow_redirects: false
+        expression: response.status == 401 && response.content_type.icontains("application/json") && response.body.bcontains(b"not_authenticated")
+    r3:
+        request:
+            cache: true
+            method: GET
+            path: /api/v1/users/connection-token/?user-only={{random}}
+            follow_redirects: false
+        expression: response.status == 404 && response.content_type.icontains("application/json") && response.body.bcontains(b"\"\"")
+expression: r2() && r3() || r0() && r1()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/KGRU47o7JtbgOC9xwLJARw
+        - https://github.com/jumpserver/jumpserver/releases/download/v2.6.2/jms_bug_check.sh

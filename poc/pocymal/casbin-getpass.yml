@@ -1,0 +1,11 @@
+name: casbin-getpass
+rules:
+  r0:
+    request:
+      method: GET
+      path: /api/get-users?p=123&pageSize=123
+    expression: response.status == 200 && response.body.bcontains(b'"name":') && response.body.bcontains(b'"password":')
+expression: r0()
+detail:
+  links:
+    - Casbin get-users 账号密码泄漏漏洞

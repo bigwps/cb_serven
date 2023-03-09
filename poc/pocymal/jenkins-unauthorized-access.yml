@@ -1,0 +1,16 @@
+name: poc-yaml-jenkins-unauthorized-access
+set:
+    r1: randomInt(1000, 9999)
+    r2: randomInt(1000, 9999)
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /script
+            follow_redirects: false
+        expression: response.status == 200 && response.body.bcontains(b"type in an arbitrary")
+expression: r0()
+detail:
+    links:
+        - https://blog.51cto.com/13770310/2156663

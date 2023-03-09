@@ -1,0 +1,9 @@
+name:  poc-yaml-tomcat-websocket-dos
+rules:
+    r0:
+        request:
+            method: GET
+            path: /examples/websocket/echo.xhtml
+        expression: |
+            response.status == 200 && response.body.bcontains(b'Apache Tomcat WebSocket')
+expression: r0()

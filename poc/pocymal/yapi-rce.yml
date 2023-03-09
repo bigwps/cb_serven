@@ -1,0 +1,20 @@
+name: poc-yaml-yapi-rce
+set:
+    redemail: randomLowercase(15)
+    redpassword: randomLowercase(15)
+rules:
+    r0:
+        request:
+            cache: true
+            method: POST
+            path: /api/user/reg
+            headers:
+                Content-Type: application/json;charset=UTF-8
+            body: |
+                {"email":"{{redemail}}@qq.com","password":"{{redpassword}}","username":"{{redemail}}"}
+            follow_redirects: true
+        expression: response.status == 200 && response.headers["Set-Cookie"].contains("_yapi_token=") && response.headers["Set-Cookie"].contains("_yapi_uid=") && response.body.bcontains(bytes(redemail))
+expression: r0()
+detail:
+    links:
+        - https://github.com/YMFE/yapi/issues/2229

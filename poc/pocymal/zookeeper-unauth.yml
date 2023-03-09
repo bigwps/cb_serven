@@ -1,0 +1,7 @@
+name: ZooKeeper 未授权访问
+set:
+  zook: Zookeeper()
+rules:
+detail:
+  links:
+    - http://wiki.peiqi.tech/redteam/vulnerability/unauthorized/Zookeeper%202181%E7%AB%AF%E5%8F%A3.html

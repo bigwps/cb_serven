@@ -1,0 +1,7 @@
+name: Rsync 未授权访问
+set:
+  rsync: RsyncUnauth()
+rules:
+detail:
+  links:
+    - http://wiki.peiqi.tech/redteam/vulnerability/unauthorized/Rsync%20873%E7%AB%AF%E5%8F%A3.html

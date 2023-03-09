@@ -1,0 +1,12 @@
+name: poc-yaml-aspcms-backend-leak
+rules:
+  r0:
+    request:
+      method: GET
+      path: /plug/oem/AspCms_OEMFun.asp
+    expression: |
+        response.status == 200 && "<script>alert".bmatches(response.body)
+expression: r0()
+detail:
+  links:
+    - https://loadcaps.com/posts/9622fcf2.html

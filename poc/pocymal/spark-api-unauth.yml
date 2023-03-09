@@ -1,0 +1,12 @@
+name: poc-yaml-spark-api-unauth
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /v1/submissions
+        expression: response.status == 400 && response.body.bcontains(b"Missing an action") && response.body.bcontains(b"serverSparkVersion")
+expression: r0()
+detail:
+    links:
+        - https://xz.aliyun.com/t/2490

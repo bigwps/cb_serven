@@ -1,0 +1,11 @@
+name: tianqing sqldet
+rules:
+  r0:
+    request:
+      method: GET
+      path: /api/dp/rptsvcsyncpoint?ccid=1
+    expression: response.status == 200 && response.body.bcontains(b'"reason":') && response.body.bcontains(b'"success"') && response.body.bcontains(b'"antiadwa":') && response.body.bcontains(b'"clientupgrade":')
+expression: r0()
+detail:
+    links:
+        - https://blog.51cto.com/u_9691128/4295047

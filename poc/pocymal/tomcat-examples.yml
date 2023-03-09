@@ -1,0 +1,10 @@
+name:  poc-yaml-tomcat-examples
+rules:
+    r0:
+        request:
+            method: GET
+            path: /examples
+            follow_redirects: true
+        expression: |
+            response.status == 200 && response.body.bcontains(b'Apache Tomcat Examples')
+expression: r0()

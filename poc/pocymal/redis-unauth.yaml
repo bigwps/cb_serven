@@ -1,0 +1,7 @@
+name: poc-yaml-redis-unauth
+set:
+  redis: RedisUnauth()
+rules:
+detail:
+  links:
+    - https://mp.weixin.qq.com/s/hMmnUXBgw0ZguaVdP66Utw

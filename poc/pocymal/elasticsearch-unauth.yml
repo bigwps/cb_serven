@@ -1,0 +1,20 @@
+name: poc-yaml-elasticsearch-unauth
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /
+            follow_redirects: false
+        expression: response.status == 200 && response.content_type.icontains("application/json") && response.body.bcontains(b"You Know, for Search")
+    r1:
+        request:
+            cache: true
+            method: GET
+            path: /_cat
+            follow_redirects: false
+        expression: response.status == 200 && response.body.bcontains(b"/_cat/master")
+expression: r0() && r1()
+detail:
+    links:
+        - https://yq.aliyun.com/articles/616757

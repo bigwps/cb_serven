@@ -1,0 +1,13 @@
+name: cobbler-webgui
+rules:
+  r0:
+    request:
+      method: GET
+      path: /cobbler/
+    expression: response.status == 200 && response.body.bcontains(b'Index of /cobbler')
+  r1:
+    request:
+      method: GET
+      path: /cblr/
+    expression: response.status == 200 && response.body.bcontains(b'Index of /cblr')
+expression: r0() && r1()

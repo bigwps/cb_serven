@@ -1,0 +1,8 @@
+name: PHPMyWind-CMS-id-SQL
+rules:
+  r0:
+    request:
+      method: GET
+      path: /show.php?id=-1 or 1=2
+    expression: response.status == 200 && response.body.bcontains(b'PHPMyWind安全警告') && response.body.bcontains(b'错误文件</strong>') && response.headers["content-type"].icontains("text/html")
+expression: r0()

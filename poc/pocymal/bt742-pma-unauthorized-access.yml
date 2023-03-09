@@ -1,0 +1,13 @@
+name: poc-yaml-bt742-pma-unauthorized-access
+rules:
+  r0:
+    request:
+      method: GET
+      path: /pma/
+      follow_redirects: false
+    expression: |
+      response.status == 200 && response.body.bcontains(b"information_schema") && response.body.bcontains(b"phpMyAdmin")
+expression: r0()
+detail:
+  links:
+    - https://mp.weixin.qq.com/s/KgAaFRKarMdycYzETyKS8A

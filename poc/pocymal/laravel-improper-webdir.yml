@@ -1,0 +1,13 @@
+name: poc-yaml-laravel-improper-webdir
+rules:
+    r0:
+        request:
+            cache: true
+            method: GET
+            path: /storage/logs/laravel.log
+            follow_redirects: false
+        expression: response.status == 200 && (response.content_type.icontains("plain") || response.content_type.icontains("octet-stream")) && (response.body.bcontains(b"vendor\\laravel\\framework") || response.body.bcontains(b"vendor/laravel/framework")) && (response.body.bcontains(b"stacktrace") || response.body.bcontains(b"Stack trace"))
+expression: r0()
+detail:
+    links:
+        - https://github.com/dem0ns/improper

