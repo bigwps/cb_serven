@@ -1,7 +1,0 @@
-discuz-ml3x-cnvd-2019-22239
-drupal-cve-2018-7600-rce
-poc-yaml-gitlist-rce-cve-2018-1000533
-h2-database-web-console-unauthorized-access
- poc-yaml-jenkins-unauthorized-access
-poc-yaml-joomla-cnvd-2019-34135-rce
-poc-yaml-qnap-cve-2019-7192

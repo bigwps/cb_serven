@@ -1,19 +1,14 @@
 
 
-本项目为go语言练习项目，兼容xray poc ，但没有写search output规则（懒），代码写了详细的注释，欢迎大家指正。
+👻
 
+CB塞尔文
 
+*Programming exercise -- go*
 
-```
-┌──┤ 🐸🐲 ├─────────🕊️
-├─◢◤ 🪐 version 1.0  CB扫描器
-├─◢◤ 📌  Go 
-├─◢◤🌊 🥲 
-├─◢◤ 🌀 FFFFFFFF
-└──────────────────────────👻
-```
+👻
 
-
+兼容xray poc ，但没有写search output规则（懒）
 
 #### 1.WEB扫描
 
